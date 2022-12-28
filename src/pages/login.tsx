@@ -1,9 +1,17 @@
-import React ,{ useState } from 'react'
+import React ,{ useState, useLayoutEffect } from 'react'
+import { useRouter } from 'next/router'
 import { LoginForm } from 'components/LoginForm'
 import { RegisterForm } from 'components/RegisterForm'
+import { useAppSelector } from 'hooks/rtkHooks'
 
 const login = () => {
     const [toggleForm, setToggleForm] = useState('login')
+    const router = useRouter()
+    const isLoggedIn = useAppSelector(state=>state.authSlice.isLoggedIn)
+    
+    useLayoutEffect(()=>{
+        if(isLoggedIn) router.push('/')
+    },[isLoggedIn])
 
     return (
         <div className='w-full min-h-screen flex'>

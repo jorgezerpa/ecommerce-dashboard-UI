@@ -1,17 +1,20 @@
 import React, { SyntheticEvent, useRef } from 'react'
 import { useForm } from 'hooks/useForm'
 import { useLoginMutation } from '../services/coreApi/auth'
+import { useAppDispatch } from '../hooks/rtkHooks'
+import { login } from '../store/authSlices/authSlice'
 
 export const LoginForm = () => {
     const { getFormInfo, formRef } = useForm()
     const [sendLogin, result] = useLoginMutation()
+    const dispatch = useAppDispatch()
 
-    const handleSubmit = (e:SyntheticEvent) => {
+    const handleSubmit = async(e:SyntheticEvent) => {
         const [jsonData, formData] = getFormInfo(e)
-        console.log(jsonData)
+        await sendLogin(jsonData)
         sendLogin(jsonData)
             .unwrap()
-            .then(result => console.log(result))
+            .then(result => dispatch(login({token:result.data.token as string, refreshToken:result.data.refreshToken as string })))
             .catch(err=>console.log(err))
     }
 
