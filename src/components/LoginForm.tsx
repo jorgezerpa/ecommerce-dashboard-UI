@@ -1,12 +1,18 @@
 import React, { SyntheticEvent, useRef } from 'react'
 import { useForm } from 'hooks/useForm'
+import { useLoginMutation } from '../services/coreApi/auth'
 
 export const LoginForm = () => {
     const { getFormInfo, formRef } = useForm()
+    const [sendLogin, result] = useLoginMutation()
 
     const handleSubmit = (e:SyntheticEvent) => {
         const [jsonData, formData] = getFormInfo(e)
         console.log(jsonData)
+        sendLogin(jsonData)
+            .unwrap()
+            .then(result => console.log(result))
+            .catch(err=>console.log(err))
     }
 
     return (
