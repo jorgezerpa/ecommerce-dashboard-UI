@@ -3,6 +3,7 @@ import { useForm } from 'hooks/useForm'
 import { useLoginMutation } from '../services/coreApi/auth'
 import { useAppDispatch } from '../hooks/rtkHooks'
 import { login } from '../store/authSlices/authSlice'
+import { BaseButton, BaseInput } from './form'
 
 export const LoginForm = () => {
     const { getFormInfo, formRef } = useForm()
@@ -20,10 +21,10 @@ export const LoginForm = () => {
     return (
       <div className='w-full'>
           <form onSubmit={handleSubmit} ref={formRef}  className='w-full flex flex-col justify-center gap-4 py-5 px-3'>
-              <input name='email' className='border-gray-300 border-2 rounded-xl w-full p-3' type="text" placeholder='email'/>
-              <input name='password' className='border-gray-300 border-2 rounded-xl w-full p-3' type="text" placeholder='password'/>
+              <BaseInput name='email' type="text" placeholder='email'  />
+              <BaseInput name='password' type="text" placeholder='password'/>
               <div>
-                  <button type='submit' className='w-full bg-gray-500 text-lg text-white font-bold px-5 py-2 rounded-xl'>login</button>
+                <BaseButton label='login' />    
               </div>
           </form>
       </div>

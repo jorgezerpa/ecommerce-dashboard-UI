@@ -1,10 +1,10 @@
 import React, { SyntheticEvent, useEffect } from 'react'
 import { useForm } from 'hooks/useForm'
 import { useCreateProductMutation } from 'services/coreApi/products'
-import { useRouter } from 'next/router'
+import { BaseButton, BaseInput } from './../../components/form'
+import { BackButton } from 'components/BackButton'
 
 const create = () => {
-    const router = useRouter()
     const { formRef, getFormInfo } = useForm()
     const [ createProduct, result ] = useCreateProductMutation()
 
@@ -15,22 +15,21 @@ const create = () => {
 
     useEffect(()=>{
         if(result.isSuccess){
-            
         }
     }, [result.data])
 
 
     return (
         <div className='px-5 pt-10'>
-            <div onClick={()=>router.back()}>back</div>
+            <BackButton />
             <h3 className='text-xl font-bold'>Create Product</h3>
             <form onSubmit={handleSubmit} ref={formRef}  className='w-full flex flex-col justify-center gap-4 py-5 px-3'>
-                <input name='name' className='border-gray-300 border-2 rounded-xl w-full p-3' type="text" placeholder='name'/>
-                <input name='description' className='border-gray-300 border-2 rounded-xl w-full p-3' type="text" placeholder='description'/>
-                <input name='price' className='border-gray-300 border-2 rounded-xl w-full p-3' type="number" placeholder='price'/>
-                <input name='quantity' className='border-gray-300 border-2 rounded-xl w-full p-3' type="text" placeholder='quantity'/>
+                <BaseInput name='name' type="text" placeholder='name'/>
+                <BaseInput name='description' type="text" placeholder='description'/>
+                <BaseInput name='price' type="number" placeholder='price'/>
+                <BaseInput name='quantity' type="text" placeholder='quantity'/>
                 <div>
-                    <button type='submit' className='w-full bg-gray-500 text-lg text-white font-bold px-5 py-2 rounded-xl'>create</button>
+                    <BaseButton label='create' />
                 </div>
             </form> 
             <div className={`${result.isSuccess ? 'block' : 'hidden'}`}>

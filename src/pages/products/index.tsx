@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useGetProductsQuery } from 'services/coreApi/products'
 import { useRouter } from 'next/router'
 
 const index = () => {
   const router = useRouter()
-  const { data, isSuccess, refetch } = useGetProductsQuery()
+  const { data, isSuccess } = useGetProductsQuery()
 
   return (
     <div className=''>
       <div className='font-bold text-5xl mt-20 ml-3'>Products</div>
+      <div className='flex w-full justify-end py-2 px-3'>
+        <div onClick={()=>router.push('/products/create')} className='px-3 py-2 bg-gray-800 text-white font-bold  rounded-xl'>New Product</div>
+      </div>
       <div className='p-3'>
                 {/* HEADER  */}
             <div className='flex gap-2 bg-gray-500 text-white font-bold px-2 py-5'>

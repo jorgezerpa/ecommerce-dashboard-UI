@@ -2,6 +2,8 @@ import React, { SyntheticEvent, useState } from 'react'
 import { useForm } from 'hooks/useForm'
 import { useGetProductQuery, useUpdateProductMutation, useDeleteProductMutation } from 'services/coreApi/products'
 import { useRouter } from 'next/router'
+import { BaseButton, BaseInput } from '../../../components/form'
+import { BackButton } from 'components/BackButton'
 
 const edit = () => {
     const router = useRouter()
@@ -9,14 +11,11 @@ const edit = () => {
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     const { data, isSuccess } = useGetProductQuery(router.query.id as string)
     const [ updateProduct, result ] = useUpdateProductMutation()
-    const [deleteProduct, deleteResult] = useDeleteProductMutation()
+    const [deleteProduct] = useDeleteProductMutation()
 
     const handleSubmit = async(e:SyntheticEvent) => {
-        const [jsonData, formData] = getFormInfo(e)
+        const [jsonData] = getFormInfo(e)
         updateProduct({data:{...jsonData}, productId:router.query.id as string})
-            .unwrap()
-            .then(data=>console.log(data))
-            .catch(error=>console.log(error))
     }
 
     const handleDeleteProduct = () => {
@@ -26,17 +25,17 @@ const edit = () => {
 
     return (
         <div className='px-5 pt-10'>
-            <div onClick={()=>router.back()}>back</div>
-            <h3 className='text-xl font-bold'>Create Product</h3>
+            <BackButton />
+            <h3 className='text-xl font-bold'>Update Product</h3>
             { isSuccess && (
                 <>
                     <form onSubmit={handleSubmit} ref={formRef}  className={`w-full flex flex-col justify-center gap-4 py-5 px-3`}>
-                        <input defaultValue={data.data.product.name} name='name' className='border-gray-300 border-2 rounded-xl w-full p-3' type="text" placeholder='name'/>
-                        <input defaultValue={data.data.product.description} name='description' className='border-gray-300 border-2 rounded-xl w-full p-3' type="text" placeholder='description'/>
-                        <input defaultValue={data.data.product.price} name='price' className='border-gray-300 border-2 rounded-xl w-full p-3' type="number" placeholder='price'/>
-                        <input defaultValue={data.data.product.quantity} name='quantity' className='border-gray-300 border-2 rounded-xl w-full p-3' type="text" placeholder='quantity'/>
+                        <BaseInput defaultValue={data.data.product.name} name='name' type="text" placeholder='name'/>
+                        <BaseInput defaultValue={data.data.product.description} name='description' type="text" placeholder='description'/>
+                        <BaseInput defaultValue={data.data.product.price} name='price' type="number" placeholder='price'/>
+                        <BaseInput defaultValue={data.data.product.quantity} name='quantity' type="text" placeholder='quantity'/>
                         <div>
-                            <button type='submit' className='w-full bg-gray-500 text-lg text-white font-bold px-5 py-2 rounded-xl'>update</button>
+                            <BaseButton label='update' />
                         </div>
                     </form>
                     <div onClick={()=>setShowDeleteModal(true)}>delete</div> 
@@ -55,8 +54,6 @@ const edit = () => {
                 </div>
             </div>
             )}
-
-
         </div>
     )
 }
