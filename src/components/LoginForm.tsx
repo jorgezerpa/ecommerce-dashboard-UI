@@ -9,9 +9,8 @@ export const LoginForm = () => {
     const [sendLogin, result] = useLoginMutation()
     const dispatch = useAppDispatch()
 
-    const handleSubmit = async(e:SyntheticEvent) => {
+    const handleSubmit = (e:SyntheticEvent) => {
         const [jsonData, formData] = getFormInfo(e)
-        await sendLogin(jsonData)
         sendLogin(jsonData)
             .unwrap()
             .then(result => dispatch(login({token:result.data.token as string, refreshToken:result.data.refreshToken as string })))
