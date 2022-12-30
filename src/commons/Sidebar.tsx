@@ -5,6 +5,7 @@ const items = [
     { title:'products', path:'/products' },
     { title:'categories', path:'/categories' },
     { title:'profile', path:'/profile' },
+    { title:'orders', path:'/orders' },
 ]
 
 const Sidebar = () => {

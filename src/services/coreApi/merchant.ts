@@ -12,9 +12,10 @@ export const merchantApi = createApi({
     }),
     endpoints: (build) => ({
         getMerchant: build.query<any, void>({query:() => ({ url: `merchant`}), providesTags:['merchant']}),
+        getClientCredentials: build.query<any, void>({query:() => ({ url: `merchant/client-credentials`}), providesTags:['merchant']}),
         updateMerchant: build.mutation<any, {productId:string, data:any}>({query:(data) => ({ url: `merchant`, method:'PATCH', body:data }), invalidatesTags:['merchant']}),
         deleteMerchant: build.mutation<any, string>({query:(productId) => ({ url: `merchant`, method:'DELETE' }), invalidatesTags:['merchant']}),
     }),
 })
 
-export const { useGetMerchantQuery, useUpdateMerchantMutation, useDeleteMerchantMutation } = merchantApi
+export const { useGetMerchantQuery, useGetClientCredentialsQuery, useUpdateMerchantMutation, useDeleteMerchantMutation } = merchantApi
