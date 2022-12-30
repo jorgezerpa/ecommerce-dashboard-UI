@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import { useGetProductsQuery } from 'services/coreApi/products'
 import { useRouter } from 'next/router'
 
@@ -15,6 +16,7 @@ const index = () => {
       <div className='p-3'>
                 {/* HEADER  */}
             <div className='flex gap-2 bg-gray-500 text-white font-bold px-2 py-5'>
+                <div className='w-full'>image</div>
                 <div className='w-full'>name</div>
                 <div className='w-full'>quantity</div>
                 <div className='w-full'>price</div>
@@ -24,6 +26,9 @@ const index = () => {
         { isSuccess && data.data.products.map((product:any)=>(
             <div key={`productList${product.id}`} className="">
               <div className='flex gap-2 border-b-3 border-gray-300 min-h-[90px] py-2 items-center'>
+                  <div className='w-full font-bold'>
+                    { product.image && <img src={product.image} alt="" width={80} />}
+                  </div>
                   <div className='w-full font-bold'>{product.name}</div>
                   <div className='w-full font-bold'>{product.quantity}</div>
                   <div className='w-full font-bold'>{product.price}$</div>

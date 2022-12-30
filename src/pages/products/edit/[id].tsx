@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { BaseButton, BaseInput } from '../../../components/form'
 import { BackButton } from 'components/BackButton'
 import { ConfirmDeleteModal } from 'components/ConfirmDeleteModal'
+import useToBase64 from 'hooks/useToBase64'
 
 const edit = () => {
     const router = useRouter()
@@ -13,9 +14,15 @@ const edit = () => {
     const { data, isSuccess } = useGetProductQuery(router.query.id as string)
     const [ updateProduct, result ] = useUpdateProductMutation()
     const [deleteProduct] = useDeleteProductMutation()
+    const { imageRef,toBase64 } = useToBase64()
 
     const handleSubmit = async(e:SyntheticEvent) => {
         const [jsonData] = getFormInfo(e)
+        delete jsonData.image
+        if(imageRef.current && imageRef.current.files && imageRef.current.files.length>0){ //just in case a new image is provided
+            const image64 = await toBase64()
+            jsonData.image=image64
+        }
         updateProduct({data:{...jsonData}, productId:router.query.id as string})
     }
 
@@ -24,7 +31,7 @@ const edit = () => {
             .then(()=>router.back())
     }
 
-    const toggleDeleteModal = (value:boolean|null) => { setShowDeleteModal(value || !showDeleteModal) }
+    const toggleDeleteModal = (value:boolean|null) => { setShowDeleteModal(!showDeleteModal) }
 
     return (
         <div className='px-5 pt-10'>
@@ -37,6 +44,8 @@ const edit = () => {
                         <BaseInput defaultValue={data.data.product.description} name='description' type="text" placeholder='description'/>
                         <BaseInput defaultValue={data.data.product.price} name='price' type="number" placeholder='price'/>
                         <BaseInput defaultValue={data.data.product.quantity} name='quantity' type="text" placeholder='quantity'/>
+                        <input type='file' name='image' ref={imageRef} />
+
                         <div>
                             <BaseButton label='update' />
                         </div>

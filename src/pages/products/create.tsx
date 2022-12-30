@@ -3,21 +3,20 @@ import { useForm } from 'hooks/useForm'
 import { useCreateProductMutation } from 'services/coreApi/products'
 import { BaseButton, BaseInput } from './../../components/form'
 import { BackButton } from 'components/BackButton'
+import useToBase64 from 'hooks/useToBase64'
 
 const create = () => {
     const { formRef, getFormInfo } = useForm()
     const [ createProduct, result ] = useCreateProductMutation()
-
+    const {imageRef, toBase64} = useToBase64()
+    
     const handleSubmit = async(e:SyntheticEvent) => {
-        const [jsonData, formData] = getFormInfo(e)
-        createProduct(jsonData)
-    }
-
-    useEffect(()=>{
-        if(result.isSuccess){
+        if(imageRef.current){
+            const [jsonData, formData] = getFormInfo(e)
+            const image = await toBase64()
+            createProduct({...jsonData, image})
         }
-    }, [result.data])
-
+    }
 
     return (
         <div className='px-5 pt-10'>
@@ -28,6 +27,7 @@ const create = () => {
                 <BaseInput name='description' type="text" placeholder='description'/>
                 <BaseInput name='price' type="number" placeholder='price'/>
                 <BaseInput name='quantity' type="text" placeholder='quantity'/>
+                <input type='file' name='image' ref={imageRef} />
                 <div>
                     <BaseButton label='create' />
                 </div>

@@ -24,8 +24,6 @@ const edit = () => {
             jsonData.image=image64
         }
         updateCategory({data:{...jsonData}, categoryId:router.query.id as string})
-            .unwrap()
-            .catch(e=>console.log(e))
     }
 
     const handleDeleteCategory = () => {

@@ -3,15 +3,13 @@ import { useForm } from 'hooks/useForm'
 import { useCreateCategoryMutation } from 'services/coreApi/categories'
 import { BaseButton, BaseInput } from './../../components/form'
 import { BackButton } from 'components/BackButton'
-import convertBase64 from 'utils/ToBase64'
 import useToBase64 from 'hooks/useToBase64'
 
 const create = () => {
     const { formRef, getFormInfo } = useForm()
     const [ createCategory, result ] = useCreateCategoryMutation()
-    // const imageRef = useRef<HTMLInputElement|null>(null)
     const {imageRef, toBase64} = useToBase64()
-    
+
     const handleSubmit = async(e:SyntheticEvent) => {
         if(imageRef.current){
             const [jsonData, formData] = getFormInfo(e)
