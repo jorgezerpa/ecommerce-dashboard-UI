@@ -29,7 +29,8 @@ export const ordersApi = createApi({
             }  
         }),
         deleteOrder: build.mutation<any, string>({query:(orderId) => ({ url: `orders/${orderId}`, method:'DELETE' }), invalidatesTags:['orders']}),
+        changeStatus: build.mutation<any, {status:String, orderId:string}>({query:({status, orderId}) => ({ url: `orders/change-status/${orderId}?status=${status}`, method:'PATCH' }), invalidatesTags:['orders']}),
     }),
 })
 
-export const { useDeleteOrderMutation, useGetOrderQuery, useGetOrdersQuery } = ordersApi
+export const { useDeleteOrderMutation, useGetOrderQuery, useGetOrdersQuery, useChangeStatusMutation } = ordersApi
