@@ -14,8 +14,8 @@ export const ConfirmDeleteModal = ({ toggleModal, showModal, handler, message, b
         <div className='bg-white p-10 rounded-lg'>
           <p>{ message || 'are you sure to proceed?'}</p>
           <div className='flex w-full justify-end mt-2 gap-2 '>
-            <button className='px-2 py-1 bg-gray-400 rounded-lg' onClick={handler}>{buttonLabel || "delete"}</button>
-            <button className='px-2 py-1 bg-gray-600 rounded-lg' onClick={toggleModal}>cancel</button>
+            <button className='px-2 py-1 bg-red-800 rounded-lg text-white' onClick={handler}>{buttonLabel || "delete"}</button>
+            <button className='px-2 py-1 bg-gray-600 rounded-lg text-white' onClick={toggleModal}>cancel</button>
           </div>
         </div>
     </div>

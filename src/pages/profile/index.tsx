@@ -2,6 +2,7 @@ import React, { SyntheticEvent, useState } from 'react'
 import { useGetMerchantQuery, useGetClientCredentialsQuery, useUpdateMerchantMutation } from 'services/coreApi/merchant'
 import { ProfileInput } from 'components/ProfileInput'
 import { useForm } from 'hooks/useForm'
+import { FaUserAlt } from 'react-icons/fa'
 
 const index = () => {
   const [showCreds, setShowCreds] = useState(false)
@@ -25,7 +26,9 @@ const index = () => {
     <div>
       { isSuccess && (
         <div className='w-full flex flex-col items-center pt-20'>
-          <div className='bg-gray-600 rounded-full w-[150px] h-[150px] mb-4'></div>
+          <div className='bg-gray-600 rounded-full w-[150px] h-[150px] mb-4 flex justify-center items-center'>
+              <FaUserAlt size={90} color='white' />
+          </div>
           <p className='font-bold text-lg mb-3'>{data.data.merchant.email}</p>
           
           <form ref={formRef} onSubmit={handleSubmit} className='w-full flex flex-col items-center gap-4'>
@@ -35,7 +38,7 @@ const index = () => {
             { wasChanged && <button className='px-3 py-2 bg-gray-500 font-bold text-white rounded-xl'>save changes</button>}
           </form>
           
-          <div className='w-full mt-10 p-3'>
+          <div className='w-full mt-10 p-3 px-10'>
             <div className='flex gap-4 mb-3'>
               <h3 className='text-xl font-bold'>Client Credentials</h3>
               <button onClick={toggleShowCreds} className='px-2 py-1 bg-gray-400 font-bold text-white rounded-xl'>
