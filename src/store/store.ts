@@ -5,6 +5,7 @@ import { authSlice } from './authSlices/authSlice'
 import { categoriesApi } from 'services/coreApi/categories'
 import { merchantApi } from 'services/coreApi/merchant'
 import { ordersApi } from 'services/coreApi/orders'
+import { quotesApi } from 'services/quotel/quotes'
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
     [productsApi.reducerPath]: productsApi.reducer,
     [categoriesApi.reducerPath]: categoriesApi.reducer,
     [merchantApi.reducerPath]: merchantApi.reducer,
-    [ordersApi.reducerPath]: ordersApi.reducer
+    [ordersApi.reducerPath]: ordersApi.reducer,
+    [quotesApi.reducerPath]: quotesApi.reducer
   },
   middleware: (getDefaultMiddleware) => 
     getDefaultMiddleware()
@@ -21,7 +23,8 @@ export const store = configureStore({
         .concat(productsApi.middleware)  
         .concat(categoriesApi.middleware)  
         .concat(merchantApi.middleware)  
-        .concat(ordersApi.middleware),  
+        .concat(ordersApi.middleware)
+        .concat(quotesApi.middleware),  
 })
 
 export type RootState = ReturnType<typeof store.getState>
