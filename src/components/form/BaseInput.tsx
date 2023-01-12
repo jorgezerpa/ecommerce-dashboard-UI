@@ -11,7 +11,7 @@ export const BaseInput = ({name, type, placeholder="", defaultValue}:BaseInputIn
   return (
     <input
         defaultValue={defaultValue && defaultValue}
-        className='border-gray-300 border-2 rounded-xl w-full p-3' 
+        className='border-gray-300 border-2 rounded-xl w-full p-3 font-semibold outline-gray-200' 
         name={name} 
         type={type} 
         placeholder={placeholder} 

@@ -6,7 +6,6 @@ export const RegisterForm = () => {
 
   const handleSubmit = (e:SyntheticEvent) => {
       const [jsonData, formData] = getFormInfo(e)
-      console.log(jsonData)
   }
 
   return (
@@ -18,7 +17,7 @@ export const RegisterForm = () => {
             <input name="phone" className='border-gray-300 border-2 rounded-xl w-full p-3' type="text" placeholder='Phone Number'/>
             <input name="password" className='border-gray-300 border-2 rounded-xl w-full p-3' type="text" placeholder='Password'/>
             <div>
-                <button type='submit' className='w-full bg-gray-500 text-lg text-white font-bold px-5 py-2 rounded-xl'>register</button>
+                <button type='submit' className='shadow-md shadow-gray-700 w-full bg-blue-700 text-lg text-white font-bold px-5 py-2 rounded-xl'>register</button>
             </div>
         </form>
     </div>

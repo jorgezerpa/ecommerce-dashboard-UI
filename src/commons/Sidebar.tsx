@@ -4,7 +4,6 @@ import { FaTshirt } from 'react-icons/fa'
 import { MdCategory } from 'react-icons/md'
 import { BsFilePersonFill } from 'react-icons/bs'
 import { GoListUnordered } from 'react-icons/go'
-import { useGetMerchantQuery } from 'services/coreApi/merchant'
 
 const items = [
     { icon: FaTshirt, title:'products', path:'/products' },
