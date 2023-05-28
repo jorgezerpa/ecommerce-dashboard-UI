@@ -1,4 +1,4 @@
-#Ecommerce Dashboard UI
+# Ecommerce Dashboard UI
 
 This repo contains an administration panel for an online store, which allows users to create and manage products and categories, view customer orders, and perform other related tasks. The user interface (UI) is built using NextJS with TypeScript and TailwindCSS, while the backend API can be found in this other repository -> https://github.com/jorgezerpa/dashboard-ecommerce (You will need both to run the project). This app is build with the best code practices, so you can take it as an starter for any similar project you want to build.
 
